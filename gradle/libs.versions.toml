@@ -1,14 +1,14 @@
 [versions]
-kotlin = "2.2.0"
-minestom = "2025.07.11-1.21.7"
-adventure = "4.23.0"
-kotlinx-coroutines = "1.10.2"
-kotlinx-serialization = "1.9.0"
-kotest = "5.9.1"
+kotlin = "2.4.21"
+minestom = "2026.10.07-26.2"
+adventure = "5.2.0"
+kotlinx-coroutines = "1.11.0"
+kotlinx-serialization = "1.11.0"
+kotest = "6.2.6"
 
-shadow = "8.3.8"
-dokka = "2.0.0"
-jreleaser = "1.19.0"
+shadow = "9.6.1"
+dokka = "2.2.0"
+jreleaser = "1.26.0"
 
 [libraries]
 minestom = { group = "net.minestom", name = "minestom", version.ref = "minestom" }

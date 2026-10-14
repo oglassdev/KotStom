@@ -16,8 +16,6 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
-tasks.withType<Test> { useJUnitPlatform() }
-
 java { withSourcesJar() }
 
 publishing {

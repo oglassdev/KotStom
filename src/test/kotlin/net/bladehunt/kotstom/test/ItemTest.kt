@@ -12,6 +12,8 @@ import net.minestom.server.item.Material
 
 class ItemTest :
     FunSpec({
+        beforeSpec { SERVER }
+
         test("materials & attributes should be set") {
             val item =
                 item(Material.BOOK) {
