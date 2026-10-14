@@ -23,16 +23,6 @@ operator fun Pos.component4() = this.yaw
 
 operator fun Pos.component5() = this.pitch
 
-fun Point.asVec(): Vec = Vec(this.x(), this.y(), this.z())
-
-fun Point.asPos(): Pos =
-    Pos(
-        this.x,
-        this.y,
-        this.z,
-        if (this is Pos) this.yaw else 0f,
-        if (this is Pos) this.pitch else 0f)
-
 fun Pos.roundToBlock(): Pos =
     Pos(
         this.blockX().toDouble(),
@@ -41,7 +31,8 @@ fun Pos.roundToBlock(): Pos =
         this.yaw,
         this.pitch)
 
-fun Vec.roundToBlock(): BlockVec = BlockVec(this)
+@Deprecated("Use Minestom's asBlockVec()", ReplaceWith("asBlockVec()"))
+fun Vec.roundToBlock(): BlockVec = asBlockVec()
 
 fun Vec.rotateAroundXDegrees(degrees: Double) = rotateAroundX(degrees * (PI / 180))
 
