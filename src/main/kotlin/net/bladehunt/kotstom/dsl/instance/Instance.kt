@@ -23,7 +23,7 @@ inline fun GenerationUnit.modify(block: UnitModifier.() -> Unit) {
     this.modifier().apply(block)
 }
 
-inline fun InstanceContainer.generator(crossinline block: GenerationUnit.() -> Unit) =
+inline fun InstanceContainer.generator(crossinline block: @InstanceDsl GenerationUnit.() -> Unit) =
     setGenerator {
         block(it)
     }
@@ -33,7 +33,7 @@ inline fun buildInstance(
     dimensionType: RegistryKey<DimensionType> = DimensionType.OVERWORLD,
     dimensionName: Key = dimensionType.key(),
     register: Boolean = true,
-    block: InstanceContainer.() -> Unit,
+    block: @InstanceDsl InstanceContainer.() -> Unit,
 ): InstanceContainer =
     InstanceContainer(registries, UUID.randomUUID(), dimensionType, null, dimensionName)
         .apply {
