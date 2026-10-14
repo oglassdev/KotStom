@@ -1,3 +1,6 @@
+// @ItemDsl on the ItemStack.Builder properties only drives IDE DSL highlighting
+@file:Suppress("DSL_MARKER_APPLIED_TO_WRONG_TARGET")
+
 package net.bladehunt.kotstom.dsl.item
 
 import net.bladehunt.kotstom.extension.adventure.asMini
@@ -7,7 +10,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 
 @DslMarker
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY)
 annotation class ItemDsl
 
 /**
@@ -43,7 +46,6 @@ value class ItemLore(
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun ItemStack.Builder.lore(block: @ItemDsl ItemLore.() -> Unit) {
     set(DataComponents.LORE, ItemLore(arrayListOf()).apply(block))
 }
@@ -117,7 +119,6 @@ inline var ItemStack.Builder.unbreakable: Boolean
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun item(
     material: Material = Material.STONE,
     block: @ItemDsl ItemStack.Builder.() -> Unit,
@@ -128,7 +129,6 @@ inline fun item(
  *
  * @author oglassdev
  */
-@ItemDsl
 fun item(material: Material): ItemStack = ItemStack.of(material)
 
 /**
@@ -136,5 +136,4 @@ fun item(material: Material): ItemStack = ItemStack.of(material)
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun ItemStack.builder(block: @ItemDsl ItemStack.Builder.() -> Unit): ItemStack = builder().apply(block).build()

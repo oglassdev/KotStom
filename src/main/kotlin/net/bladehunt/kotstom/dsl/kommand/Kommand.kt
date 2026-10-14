@@ -8,7 +8,7 @@ import net.minestom.server.command.builder.CommandExecutor
 internal typealias KommandExecutor = context(CommandContext) (CommandSender) -> Unit
 
 @DslMarker
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
 annotation class KommandDSL
 
 /**
@@ -16,7 +16,6 @@ annotation class KommandDSL
  *
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.defaultExecutor(crossinline block: @KommandDSL KommandExecutor) =
     CommandExecutor { sender, context -> block(context, sender) }
         .also { defaultExecutor = it }
@@ -27,7 +26,6 @@ inline fun Kommand.defaultExecutor(crossinline block: @KommandDSL KommandExecuto
  * @param block The suspending code to run
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.subkommand(name: String, vararg aliases: String, block: @KommandDSL Kommand.() -> Unit): Kommand =
     Kommand(name, *aliases).apply(block).also { command ->
         addSubcommand(command)
@@ -39,6 +37,5 @@ inline fun Kommand.subkommand(name: String, vararg aliases: String, block: @Komm
  * @see net.bladehunt.kotstom.command.Kommand
  * @author oglassdev
  */
-@KommandDSL
 inline fun kommand(name: String, vararg aliases: String, block: @KommandDSL Kommand.() -> Unit): Kommand =
     Kommand(name, *aliases).apply(block)

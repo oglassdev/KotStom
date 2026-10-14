@@ -12,7 +12,7 @@ import net.minestom.server.world.DimensionType
 import java.util.*
 
 @DslMarker
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.TYPE)
 annotation class InstanceDsl
 
 inline var InstanceContainer.chunkAutoLoad: Boolean
@@ -28,7 +28,6 @@ inline fun InstanceContainer.generator(crossinline block: GenerationUnit.() -> U
         block(it)
     }
 
-@InstanceDsl
 inline fun buildInstance(
     registries: Registries = MinecraftServer.getRegistries(),
     dimensionType: RegistryKey<DimensionType> = DimensionType.OVERWORLD,

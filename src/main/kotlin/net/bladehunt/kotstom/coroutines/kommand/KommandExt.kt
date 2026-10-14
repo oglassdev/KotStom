@@ -21,7 +21,6 @@ internal typealias SuspendKommandExecutor = suspend context(CommandContext) (Com
  * @param block The suspending code to run
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.defaultExecutorAsync(
     context: CoroutineContext = MinestomDispatcher,
     crossinline block: @KommandDSL SuspendKommandExecutor
@@ -37,7 +36,6 @@ inline fun Kommand.defaultExecutorAsync(
  * @param block The suspending code to run
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.defaultExecutorBlocking(
     coroutineContext: CoroutineContext = Dispatchers.Default,
     crossinline block: @KommandDSL SuspendKommandExecutor
