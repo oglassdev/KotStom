@@ -14,6 +14,7 @@ dependencies {
     testImplementation(libs.minestom)
     testImplementation(libs.adventure.minimessage)
     testImplementation(libs.bundles.test)
+    testImplementation(libs.kotlinx.coroutines)
 }
 
 java { withSourcesJar() }

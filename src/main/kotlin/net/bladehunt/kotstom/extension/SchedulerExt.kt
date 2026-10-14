@@ -1,7 +1,7 @@
 package net.bladehunt.kotstom.extension
 
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 import net.minestom.server.timer.ExecutionType
 import net.minestom.server.timer.Schedulable
 import net.minestom.server.timer.Scheduler
@@ -11,8 +11,9 @@ import net.minestom.server.timer.TaskSchedule
 suspend fun Scheduler.await(
     delay: TaskSchedule,
     executionType: ExecutionType = ExecutionType.TICK_START
-) = suspendCoroutine {
-    this.buildTask { it.resume(Unit) }.delay(delay).executionType(executionType).schedule()
+): Unit = suspendCancellableCoroutine { continuation ->
+    val task = buildTask { continuation.resume(Unit) }.delay(delay).executionType(executionType).schedule()
+    continuation.invokeOnCancellation { task.cancel() }
 }
 
 /** Suspends a coroutine until a delay is met */
