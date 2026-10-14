@@ -1,6 +1,3 @@
-// @ItemDsl on the ItemStack.Builder properties only drives IDE DSL highlighting
-@file:Suppress("DSL_MARKER_APPLIED_TO_WRONG_TARGET")
-
 package net.bladehunt.kotstom.dsl.item
 
 import net.bladehunt.kotstom.extension.adventure.asMini
@@ -10,7 +7,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 
 @DslMarker
-@Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.TYPE)
 annotation class ItemDsl
 
 /**
@@ -55,7 +52,6 @@ inline fun ItemStack.Builder.lore(block: @ItemDsl ItemLore.() -> Unit) {
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.amount: Int
     get() = throw NotImplementedError("Cannot get amount from ItemStack.Builder")
     set(value) {
@@ -67,7 +63,6 @@ inline var ItemStack.Builder.amount: Int
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.itemName: Component
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -79,7 +74,6 @@ inline var ItemStack.Builder.itemName: Component
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.customName: Component
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -91,7 +85,6 @@ inline var ItemStack.Builder.customName: Component
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.damage: Int
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -103,7 +96,6 @@ inline var ItemStack.Builder.damage: Int
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.unbreakable: Boolean
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {

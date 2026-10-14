@@ -19,7 +19,6 @@ import java.util.function.Function
  * @property arguments The list of command arguments
  * @author oglassdev
  */
-@KommandDSL
 data class KommandSyntaxBuilder(
     val conditions: MutableList<CommandCondition> = arrayListOf(),
     var executor: CommandExecutor? = null,

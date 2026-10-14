@@ -8,7 +8,7 @@ import net.minestom.server.command.builder.CommandExecutor
 internal typealias KommandExecutor = context(CommandContext) (CommandSender) -> Unit
 
 @DslMarker
-@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
+@Target(AnnotationTarget.TYPE)
 annotation class KommandDSL
 
 /**
