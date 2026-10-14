@@ -3,6 +3,7 @@ package net.bladehunt.kotstom.test
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import net.bladehunt.kotstom.CommandManager
+import net.bladehunt.kotstom.command.invoke
 import net.bladehunt.kotstom.dsl.kommand.kommand
 import net.bladehunt.kotstom.dsl.kommand.subkommand
 import net.bladehunt.kotstom.dsl.kommand.syntax

@@ -1,14 +1,11 @@
 package net.bladehunt.kotstom.dsl.kommand
 
 import net.bladehunt.kotstom.command.Kommand
-import net.bladehunt.kotstom.command.KommandExecutorContext
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.CommandContext
 import net.minestom.server.command.builder.CommandExecutor
 
-internal typealias SingleKommandExecutor = KommandExecutorContext.(CommandSender) -> Unit
-
-internal typealias KommandExecutor = KommandExecutorContext.(CommandSender, CommandContext) -> Unit
+internal typealias KommandExecutor = context(CommandContext) (CommandSender) -> Unit
 
 @DslMarker
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE)
@@ -20,17 +17,8 @@ annotation class KommandDSL
  * @author oglassdev
  */
 @KommandDSL
-inline fun Kommand.defaultExecutor(crossinline block: @KommandDSL SingleKommandExecutor) =
-    defaultExecutor { sender, _ -> block(sender) }
-
-/**
- * Sets the default executor of the Kommand
- *
- * @author oglassdev
- */
-@KommandDSL
 inline fun Kommand.defaultExecutor(crossinline block: @KommandDSL KommandExecutor) =
-    CommandExecutor { sender, context -> KommandExecutorContext(context).block(sender, context) }
+    CommandExecutor { sender, context -> block(context, sender) }
         .also { defaultExecutor = it }
 
 /**
