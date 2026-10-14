@@ -1,5 +1,6 @@
 package net.bladehunt.kotstom.example.command
 
+import net.bladehunt.kotstom.command.invoke
 import net.bladehunt.kotstom.dsl.kommand.buildSyntax
 import net.bladehunt.kotstom.dsl.kommand.defaultExecutor
 import net.bladehunt.kotstom.dsl.kommand.kommand

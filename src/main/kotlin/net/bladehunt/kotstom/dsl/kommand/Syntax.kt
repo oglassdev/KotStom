@@ -1,7 +1,6 @@
 package net.bladehunt.kotstom.dsl.kommand
 
 import net.bladehunt.kotstom.command.Kommand
-import net.bladehunt.kotstom.command.KommandExecutorContext
 import net.bladehunt.kotstom.command.KommandSyntax
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.CommandExecutor
@@ -59,21 +58,9 @@ data class KommandSyntaxBuilder(
      */
     @KommandDSL
     inline fun executor(
-        crossinline block: @KommandDSL SingleKommandExecutor
-    ): CommandExecutor = executor { player, _ -> block(player) }
-
-    /**
-     * Sets the executor for the command
-     *
-     * @param block The executor logic
-     * @return The command executor
-     * @author oglassdev
-     */
-    @KommandDSL
-    inline fun executor(
         crossinline block: @KommandDSL KommandExecutor
     ): CommandExecutor =
-        CommandExecutor { sender, ctx -> KommandExecutorContext(ctx).block(sender, ctx) }
+        CommandExecutor { sender, ctx -> block(ctx, sender) }
             .also { executor = it }
 
     /**
@@ -151,12 +138,12 @@ inline fun Kommand.syntax(
             true
         },
     defaultValues: Map<String, Function<CommandSender, Any>> = emptyMap(),
-    crossinline block: @KommandDSL KommandExecutorContext.(CommandSender) -> Unit,
+    crossinline block: @KommandDSL KommandExecutor,
 ) =
     KommandSyntax(
         commandCondition = { sender, label -> condition(sender, label) },
         commandExecutor = { sender, context ->
-            KommandExecutorContext(context).block(sender)
+            block(context, sender)
         },
         defaultValues = defaultValues,
         args = arguments
