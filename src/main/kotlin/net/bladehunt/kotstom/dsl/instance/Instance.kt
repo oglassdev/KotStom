@@ -1,12 +1,12 @@
 package net.bladehunt.kotstom.dsl.instance
 
-import net.bladehunt.kotstom.DimensionTypeRegistry
 import net.bladehunt.kotstom.InstanceManager
 import net.kyori.adventure.key.Key
+import net.minestom.server.MinecraftServer
 import net.minestom.server.instance.InstanceContainer
 import net.minestom.server.instance.generator.GenerationUnit
 import net.minestom.server.instance.generator.UnitModifier
-import net.minestom.server.registry.DynamicRegistry
+import net.minestom.server.registry.Registries
 import net.minestom.server.registry.RegistryKey
 import net.minestom.server.world.DimensionType
 import java.util.*
@@ -30,13 +30,13 @@ inline fun InstanceContainer.generator(crossinline block: GenerationUnit.() -> U
 
 @InstanceDsl
 inline fun buildInstance(
-    dimensionTypeRegistry: DynamicRegistry<DimensionType> = DimensionTypeRegistry,
+    registries: Registries = MinecraftServer.getRegistries(),
     dimensionType: RegistryKey<DimensionType> = DimensionType.OVERWORLD,
     dimensionName: Key = dimensionType.key(),
     register: Boolean = true,
     block: InstanceContainer.() -> Unit,
 ): InstanceContainer =
-    InstanceContainer(dimensionTypeRegistry, UUID.randomUUID(), dimensionType, null, dimensionName)
+    InstanceContainer(registries, UUID.randomUUID(), dimensionType, null, dimensionName)
         .apply {
             block()
             if (register) InstanceManager.registerInstance(this)

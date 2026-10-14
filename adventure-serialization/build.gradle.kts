@@ -11,8 +11,6 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
-tasks.test { useJUnitPlatform() }
-
 publishing {
     publications {
         create<MavenPublication>("library") {

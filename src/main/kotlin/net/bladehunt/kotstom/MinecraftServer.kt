@@ -20,7 +20,6 @@ import net.minestom.server.item.enchant.*
 import net.minestom.server.item.instrument.Instrument
 import net.minestom.server.listener.manager.PacketListenerManager
 import net.minestom.server.message.ChatType
-import net.minestom.server.monitoring.BenchmarkManager
 import net.minestom.server.network.ConnectionManager
 import net.minestom.server.network.packet.PacketParser
 import net.minestom.server.network.packet.client.ClientPacket
@@ -54,9 +53,6 @@ inline val TeamManager: TeamManager
 
 inline val SchedulerManager: SchedulerManager
     get() = getSchedulerManager()
-
-inline val BenchmarkManager: BenchmarkManager
-    get() = getBenchmarkManager()
 
 inline val ExceptionManager: ExceptionManager
     get() = getExceptionManager()

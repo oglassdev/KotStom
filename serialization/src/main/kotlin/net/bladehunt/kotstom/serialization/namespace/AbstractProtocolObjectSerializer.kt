@@ -10,20 +10,20 @@ import net.kyori.adventure.key.Key
 import net.minestom.server.registry.StaticProtocolObject
 import kotlin.reflect.KClass
 
-abstract class AbstractProtocolObjectSerializer<T : Any>(
+abstract class AbstractProtocolObjectSerializer<T : StaticProtocolObject<T>>(
     serialName: String,
-) : KSerializer<StaticProtocolObject<T>> {
+) : KSerializer<T> {
     constructor(clazz: KClass<T>) : this(requireNotNull(clazz.qualifiedName))
 
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
 
-    protected abstract fun fromKey(key: Key): StaticProtocolObject<T>?
+    protected abstract fun fromKey(key: Key): T?
 
-    final override fun deserialize(decoder: Decoder): StaticProtocolObject<T> = requireNotNull(fromKey(Key.key(decoder.decodeString())))
+    final override fun deserialize(decoder: Decoder): T = requireNotNull(fromKey(Key.key(decoder.decodeString())))
 
     final override fun serialize(
         encoder: Encoder,
-        value: StaticProtocolObject<T>,
+        value: T,
     ) = encoder.encodeString(value.name())
 }
