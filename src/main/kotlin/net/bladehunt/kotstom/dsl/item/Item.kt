@@ -7,7 +7,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 
 @DslMarker
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.TYPE)
 annotation class ItemDsl
 
 /**
@@ -43,7 +43,6 @@ value class ItemLore(
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun ItemStack.Builder.lore(block: @ItemDsl ItemLore.() -> Unit) {
     set(DataComponents.LORE, ItemLore(arrayListOf()).apply(block))
 }
@@ -53,7 +52,6 @@ inline fun ItemStack.Builder.lore(block: @ItemDsl ItemLore.() -> Unit) {
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.amount: Int
     get() = throw NotImplementedError("Cannot get amount from ItemStack.Builder")
     set(value) {
@@ -65,7 +63,6 @@ inline var ItemStack.Builder.amount: Int
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.itemName: Component
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -77,7 +74,6 @@ inline var ItemStack.Builder.itemName: Component
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.customName: Component
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -89,7 +85,6 @@ inline var ItemStack.Builder.customName: Component
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.damage: Int
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -101,7 +96,6 @@ inline var ItemStack.Builder.damage: Int
  *
  * @author oglassdev
  */
-@ItemDsl
 inline var ItemStack.Builder.unbreakable: Boolean
     get() = throw NotImplementedError("Cannot get ItemComponent from ItemStack.Builder")
     set(value) {
@@ -117,7 +111,6 @@ inline var ItemStack.Builder.unbreakable: Boolean
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun item(
     material: Material = Material.STONE,
     block: @ItemDsl ItemStack.Builder.() -> Unit,
@@ -128,7 +121,6 @@ inline fun item(
  *
  * @author oglassdev
  */
-@ItemDsl
 fun item(material: Material): ItemStack = ItemStack.of(material)
 
 /**
@@ -136,5 +128,4 @@ fun item(material: Material): ItemStack = ItemStack.of(material)
  *
  * @author oglassdev
  */
-@ItemDsl
 inline fun ItemStack.builder(block: @ItemDsl ItemStack.Builder.() -> Unit): ItemStack = builder().apply(block).build()

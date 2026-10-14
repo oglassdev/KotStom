@@ -5,7 +5,7 @@ import net.minestom.server.event.EventListener
 import net.minestom.server.event.EventNode
 
 @DslMarker
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.TYPE)
+@Target(AnnotationTarget.TYPE)
 annotation class EventDSL
 
 /**

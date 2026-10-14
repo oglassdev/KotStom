@@ -16,7 +16,6 @@ import kotlin.coroutines.CoroutineContext
  * @return The command executor
  * @author oglassdev
  */
-@KommandDSL
 inline fun KommandSyntaxBuilder.executorAsync(
     context: CoroutineContext = MinestomDispatcher,
     crossinline block: @KommandDSL SuspendKommandExecutor
@@ -33,7 +32,6 @@ inline fun KommandSyntaxBuilder.executorAsync(
  * @return The command executor
  * @author oglassdev
  */
-@KommandDSL
 inline fun KommandSyntaxBuilder.executorBlocking(
     crossinline block: @KommandDSL SuspendKommandExecutor
 ) =

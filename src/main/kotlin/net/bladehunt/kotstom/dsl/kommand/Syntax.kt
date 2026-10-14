@@ -31,7 +31,6 @@ data class KommandSyntaxBuilder(
      * @return The player-only command condition
      * @author oglassdev
      */
-    @KommandDSL
     fun onlyPlayers(): CommandCondition =
         CommandCondition { commandSender, _ -> commandSender is Player }.also(conditions::add)
 
@@ -42,7 +41,6 @@ data class KommandSyntaxBuilder(
      * @return The custom command condition
      * @author oglassdev
      */
-    @KommandDSL
     fun condition(
         condition: CommandCondition
     ) {
@@ -56,7 +54,6 @@ data class KommandSyntaxBuilder(
      * @return The command executor
      * @author oglassdev
      */
-    @KommandDSL
     inline fun executor(
         crossinline block: @KommandDSL KommandExecutor
     ): CommandExecutor =
@@ -71,7 +68,6 @@ data class KommandSyntaxBuilder(
      * @return The function providing the default value
      * @author oglassdev
      */
-    @KommandDSL
     inline fun <T> default(
         argument: Argument<T>,
         crossinline block: @KommandDSL (CommandSender) -> T
@@ -88,7 +84,6 @@ data class KommandSyntaxBuilder(
      * @return The function providing the default value
      * @author oglassdev
      */
-    @KommandDSL
     inline fun default(
         key: String,
         crossinline block: @KommandDSL (CommandSender) -> Any
@@ -130,7 +125,6 @@ data class KommandSyntaxBuilder(
  * @param block The executor logic
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.syntax(
     vararg arguments: Argument<*>,
     crossinline condition: @KommandDSL (sender: CommandSender, label: String?) -> Boolean =
@@ -157,7 +151,6 @@ inline fun Kommand.syntax(
  * @param block The `SyntaxBuilder` logic
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.buildSyntax(
     vararg arguments: Argument<*>,
     block: @KommandDSL KommandSyntaxBuilder.() -> Unit
@@ -173,7 +166,6 @@ inline fun Kommand.buildSyntax(
  * @param block The `SyntaxBuilder` logic.
  * @author oglassdev
  */
-@KommandDSL
 inline fun Kommand.buildSyntax(block: @KommandDSL KommandSyntaxBuilder.() -> Unit) =
     KommandSyntaxBuilder().let {
         it.block()
