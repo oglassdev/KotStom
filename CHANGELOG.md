@@ -1,25 +1,25 @@
 ### 0.6.0-beta.0
 
 - **Breaking Changes**
-    - Updated to Minestom 26.2, Java 25, and Kotlin 2.4.21
-    - Removed `MinecraftServer.BenchmarkManager` (removed upstream in Minestom)
-    - `buildInstance` now accepts `Registries` instead of the dimension type registry
-    - `Kommand`: Replaced `KommandExecutorContext` with a `context(CommandContext)` parameter and top-level `Argument.invoke()`, and removed the unused `scope` parameter from `defaultExecutorAsync`
-    - `@InstanceDsl` now restricts implicit `InstanceContainer` receiver scope inside `generator { }`
-    - Removed no-op `@DslMarker` annotations from functions and properties
+    - Updated to Minestom 26.2, Java 25, and Kotlin 2.4.21 (#18)
+    - Removed `MinecraftServer.BenchmarkManager` (removed upstream in Minestom) (#18)
+    - `buildInstance` now accepts `Registries` instead of the dimension type registry (#18)
+    - `Kommand`: Replaced `KommandExecutorContext` with a `context(CommandContext)` parameter and top-level `Argument.invoke()`, and removed the unused `scope` parameter from `defaultExecutorAsync` (#20)
+    - `@InstanceDsl` now restricts implicit `InstanceContainer` receiver scope inside `generator { }` (#23)
+    - Removed no-op `@DslMarker` annotations from functions and properties (#22)
 - Features
-    - Added `SchedulerDispatcher` and `Scheduler.asCoroutineDispatcher()` for running coroutines on any Minestom scheduler
+    - Added `SchedulerDispatcher` and `Scheduler.asCoroutineDispatcher()` for running coroutines on any Minestom scheduler (#28)
 - Fixes
-    - `MinestomDispatcher` now counts coroutine delays in ticks
-    - Included `overrideLimiter` in `ParticleBuilder` equality and hash code
-    - Registered `StaticProtocolObject` serializers per concrete type in `MinestomModule`
-    - Dropped `Point` extensions shadowed by Minestom members (`asVec()`, `asPos()`) and deprecated `Vec.roundToBlock()` in favor of `asBlockVec()`
+    - `MinestomDispatcher` now counts coroutine delays in ticks (#27)
+    - Included `overrideLimiter` in `ParticleBuilder` equality and hash code (#25)
+    - Registered `StaticProtocolObject` serializers per concrete type in `MinestomModule` (#18)
+    - Dropped `Point` extensions shadowed by Minestom members (`asVec()`, `asPos()`) and deprecated `Vec.roundToBlock()` in favor of `asBlockVec()` (#21)
 
 ### 0.5.0-alpha.0
 
 - **Breaking Changes**
     - Moved group ID from `net.bladehunt` to `dev.oglass`
-    - Updated to Minestom 1.21.7 and `DataComponents`
+    - Updated to Minestom 1.21.7 and `DataComponents` (#16)
 
 ### 0.4.0 (Proposed/alpha)
 

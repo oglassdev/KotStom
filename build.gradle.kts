@@ -87,6 +87,17 @@ jreleaser {
             armored = true
         }
     }
+    release {
+        github {
+            prerelease {
+                pattern = ".*-(alpha|beta|rc).*"
+            }
+            changelog {
+                formatted = Active.ALWAYS
+                preset = "conventional-commits"
+            }
+        }
+    }
     deploy {
         maven {
             mavenCentral {
