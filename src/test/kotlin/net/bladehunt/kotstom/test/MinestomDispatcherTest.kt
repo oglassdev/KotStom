@@ -70,8 +70,9 @@ class MinestomDispatcherTest :
                     launch { SchedulerManager.await(TaskSchedule.tick(20)).also { resumed = true } },
                 )
             jobs.forEach { it.cancel() }
-            repeat(25) { tick() }
+            tick()
             jobs.forEach { it.isCompleted shouldBe true }
+            repeat(25) { tick() }
             resumed shouldBe false
         }
     })
