@@ -47,9 +47,6 @@ object MinestomDispatcher : CoroutineDispatcher(), Delay {
         return DisposableHandle { task.cancel() }
     }
 
-    @Deprecated("Not called by kotlinx.coroutines", level = DeprecationLevel.HIDDEN)
-    override suspend fun delay(time: Long) = kotlinx.coroutines.delay(time)
-
     private fun ticksFor(timeMillis: Long): TaskSchedule {
         val ticks = timeMillis / MinecraftServer.TICK_MS + if (timeMillis % MinecraftServer.TICK_MS == 0L) 0 else 1
         return TaskSchedule.tick(ticks.coerceIn(1, Int.MAX_VALUE.toLong()).toInt())
