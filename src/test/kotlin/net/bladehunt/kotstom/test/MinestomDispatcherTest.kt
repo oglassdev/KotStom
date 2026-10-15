@@ -13,8 +13,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import net.bladehunt.kotstom.SchedulerManager
 import net.bladehunt.kotstom.coroutines.MinestomDispatcher
+import net.bladehunt.kotstom.coroutines.asCoroutineDispatcher
 import net.bladehunt.kotstom.coroutines.delayTicks
 import net.bladehunt.kotstom.extension.await
+import net.minestom.server.timer.Scheduler
 import net.minestom.server.timer.TaskSchedule
 
 private fun tick() {
@@ -74,5 +76,17 @@ class MinestomDispatcherTest :
             jobs.forEach { it.isCompleted shouldBe true }
             repeat(25) { tick() }
             resumed shouldBe false
+        }
+
+        test("custom schedulers only advance when ticked") {
+            val scheduler = Scheduler.newScheduler()
+            val job = scope.launch(scheduler.asCoroutineDispatcher(), CoroutineStart.UNDISPATCHED) { delayTicks(2) }
+            repeat(5) { tick() }
+            job.isActive shouldBe true
+            repeat(2) { scheduler.processTick() }
+            job.isCompleted shouldBe true
+
+            scheduler.asCoroutineDispatcher() shouldBe scheduler.asCoroutineDispatcher()
+            SchedulerManager.asCoroutineDispatcher() shouldBe MinestomDispatcher
         }
     })
