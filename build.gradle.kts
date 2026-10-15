@@ -83,7 +83,9 @@ tasks.assemble {
 jreleaser {
     signing {
         active = Active.ALWAYS
-        armored = true
+        pgp {
+            armored = true
+        }
     }
     deploy {
         maven {
