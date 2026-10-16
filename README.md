@@ -14,7 +14,7 @@ repositories {
 
 The latest version can be found [here](https://github.com/oglassdev/KotStom/releases).
 
-**The KotStom version for 1.21.7 is `0.5.0-alpha.0`**
+**The KotStom version for 26.2 is `0.6.0-beta.0`**
 
 ## Module Overview
 
@@ -26,7 +26,7 @@ implementation("dev.oglass:kotstom:<version>")
 
 - Minestom Extensions
     - Tag delegates (`by Tag`)
-    - Scheduler extensions (`#await`, `scheduleTask`)
+    - Scheduler extensions (`#await`, `scheduleTask`, `asCoroutineDispatcher`)
     - Adventure extensions
         - Better `text` function
         - `String.asMini` - Converts to MiniMessage. Requires MiniMessage to be in classpath

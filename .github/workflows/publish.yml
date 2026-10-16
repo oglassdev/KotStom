@@ -3,6 +3,9 @@ name: Publish project to Maven Central
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Release

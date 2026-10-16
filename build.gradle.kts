@@ -83,7 +83,20 @@ tasks.assemble {
 jreleaser {
     signing {
         active = Active.ALWAYS
-        armored = true
+        pgp {
+            armored = true
+        }
+    }
+    release {
+        github {
+            prerelease {
+                pattern = ".*-(alpha|beta|rc).*"
+            }
+            changelog {
+                formatted = Active.ALWAYS
+                preset = "conventional-commits"
+            }
+        }
     }
     deploy {
         maven {

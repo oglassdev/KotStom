@@ -22,7 +22,7 @@ publishing {
             pom {
                 name = "KotStom Serialization"
                 description = "kotlinx.serialization utilities for Minestom"
-                url = "https://github.com/bladehuntmc/KotStom"
+                url = "https://github.com/oglassdev/KotStom"
 
                 licenses {
                     license {
@@ -41,13 +41,13 @@ publishing {
 
                 issueManagement {
                     system = "GitHub"
-                    url = "https://github.com/bladehuntmc/KotStom/issues"
+                    url = "https://github.com/oglassdev/KotStom/issues"
                 }
 
                 scm {
-                    connection = "scm:git:git:github.com/bladehuntmc/KotStom.git"
-                    developerConnection = "scm:git:https://github.com/bladehuntmc/KotStom.git"
-                    url = "https://github.com/bladehuntmc/KotStom"
+                    connection = "scm:git:git:github.com/oglassdev/KotStom.git"
+                    developerConnection = "scm:git:https://github.com/oglassdev/KotStom.git"
+                    url = "https://github.com/oglassdev/KotStom"
                 }
             }
         }
