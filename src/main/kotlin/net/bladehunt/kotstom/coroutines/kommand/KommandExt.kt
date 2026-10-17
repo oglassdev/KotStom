@@ -2,10 +2,10 @@ package net.bladehunt.kotstom.coroutines.kommand
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import net.bladehunt.kotstom.command.Kommand
 import net.bladehunt.kotstom.coroutines.MinestomDispatcher
+import net.bladehunt.kotstom.coroutines.launchReporting
 import net.bladehunt.kotstom.dsl.kommand.KommandDSL
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.CommandContext
@@ -13,6 +13,23 @@ import net.minestom.server.command.builder.CommandExecutor
 import kotlin.coroutines.CoroutineContext
 
 internal typealias SuspendKommandExecutor = suspend context(CommandContext) (CommandSender) -> Unit
+
+/**
+ * Sets the async default executor of the Kommand. Cancelling [scope] cancels running executions,
+ * and failures are reported to the `ExceptionManager` without cancelling [scope].
+ *
+ * @param scope The `CoroutineScope` that owns the launched coroutines
+ * @param block The suspending code to run
+ * @author oglassdev
+ */
+inline fun Kommand.defaultExecutorAsync(
+    scope: CoroutineScope,
+    crossinline block: @KommandDSL SuspendKommandExecutor
+) =
+    CommandExecutor { sender, ctx ->
+        scope.launchReporting { block(ctx, sender) }
+    }
+        .also { defaultExecutor = it }
 
 /**
  * Sets the async default executor of the Kommand
@@ -24,11 +41,7 @@ internal typealias SuspendKommandExecutor = suspend context(CommandContext) (Com
 inline fun Kommand.defaultExecutorAsync(
     context: CoroutineContext = MinestomDispatcher,
     crossinline block: @KommandDSL SuspendKommandExecutor
-) =
-    CommandExecutor { sender, ctx ->
-        CoroutineScope(context).launch { block(ctx, sender) }
-    }
-        .also { defaultExecutor = it }
+) = defaultExecutorAsync(CoroutineScope(context), block)
 
 /**
  * Sets the blocking default executor of the Kommand
